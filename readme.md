@@ -125,6 +125,6 @@ By using the `useMutation` hook, you're able to handle the mutation and update t
 
 ## **Wrapping Up**
 
-**react-query** is a game-changer when it comes to handling requests in React. It simplifies data fetching, caching, and mutations, allowing you to focus on building features rather than battling with state management. With its intuitive hooks and powerful caching mechanisms, **react-query** streamlines the entire process of handling requests and updating data in your React applications. You can also refer to the official docs more info: https://tanstack.com/query/v3/docs/react/overview
+**react-query** is a game-changer when it comes to handling requests in React. It simplifies data fetching, caching, and mutations, allowing you to focus on building features rather than battling with state management. With its intuitive hooks and powerful caching mechanisms, **react-query** streamlines the entire process of handling requests and updating data in your React applications. You can also refer to the official docs for more info: https://tanstack.com/query/v3/docs/react/overview
 
 So, whether you're building a simple todo app or a complex e-commerce platform, give **react-query** a try. Your future self will thank you for the reduced complexity and enhanced developer experience it brings to the table. *Happy coding!* 🚀
