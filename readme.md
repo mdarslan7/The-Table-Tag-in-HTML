@@ -1,130 +1,287 @@
-# Handling Requests in React using react-query
+# The `<table>` Tag in HTML
 
-When it comes to building modern web applications, handling data fetching and state management can be a bit of a puzzle. However, the days of wrestling with complex state management libraries and writing verbose code for data requests are long gone, thanks to libraries like **react-query**. In this article, we'll dive into the world of handling requests in React using **react-query**, and we promise it's going to make your life as a developer a whole lot easier.
+Tables! You've seen them everywhere—from Excel spreadsheets to data-heavy websites. Tables in HTML are a way of structuring data into rows and columns, giving them a tabular format. This structuring is done so that information can be easily interpreted from the tables.
 
-## **Introducing react-query**
+This is how a basic HTML table looks like:
 
-**react-query** is a powerful library that simplifies data fetching, caching, synchronization, and updates in React applications. It's like having a super-smart assistant that handles all the nitty-gritty details of managing your application's data for you.
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1697631285097/698b5e12-3b97-48c9-b7e0-53165c1b240f.png)
 
-One of the standout features of **react-query** is its ability to abstract away the complexities of making API calls, caching the results, and keeping the data in sync across your components. This means you can spend less time worrying about data management and more time focusing on building awesome user experiences.
+In this article, let's explore how tables work and how can you create your own. Understanding the `<table>` tag and its child elements is essential for organizing and displaying tabular data on the web.
 
-## **Installation**
+## `<table>` tag
 
-Getting started with **react-query** is a breeze. First, make sure you have a React project set up. If not, you can create one using `create-react-app` or any other method you prefer. Once you're in your project directory, open up your terminal and type:
+First things first, the `<table>` tag serves as the foundation of your table. Think of it as the container for all the other table elements you'll learn about, just like your entire HTML gets wrapped up inside the `<html>` tag.
 
-```bash
-npm install react-query
+```html
+<table>
+  <!-- Table elements go here -->
+</table>
 ```
 
-Or if you're using Yarn:
+## `<td>` tag
 
-```bash
-yarn add react-query
+The smallest unit inside your table is the `<td>` tag which stands for 'table data'.
+
+```xml
+<td>Hi, I'm your first cell.</td>
+<td>I'm your second cell.</td>
+<td>I'm your third cell.</td>
+<td>I'm your fourth cell.</td>
 ```
 
-With **react-query** installed, you're ready to rock!
+This code will create four 'table data' cells for you, and by default would place all the cells in the same line, in the same row, because we are not specifying the rows explicitly. Right now, they look like this:
 
-## **Fetching Data**
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1697632201138/d1246554-2c07-408d-b593-539f3afb5fda.png)
 
-Let's dive into the fun part: fetching data. Imagine you're building a todo list application, and you want to fetch a list of todos from your API. With **react-query**, this is incredibly straightforward.
+## `<tr>` tag
 
-In your component file, import the necessary dependencies:
+But that is not how we want our tables. We need to group our `<td>` tags to make an actual table and we do that by using `<tr>` tag which is 'table-row'. So if we copy our code multiple times and put them in `<tr>` tags, this is what we get.
 
-```javascript
-import { useQuery } from 'react-query';
+```xml
+<table>
+        <tr>
+            <td>Hi, I'm your first cell.</td>
+            <td>I'm your second cell.</td>
+            <td>I'm your third cell.</td>
+            <td>I'm your fourth cell.</td>
+        </tr>
+
+        <tr>
+            <td>Hi, I'm your first cell.</td>
+            <td>I'm your second cell.</td>
+            <td>I'm your third cell.</td>
+            <td>I'm your fourth cell.</td>
+        </tr>
+
+        <tr>
+            <td>Hi, I'm your first cell.</td>
+            <td>I'm your second cell.</td>
+            <td>I'm your third cell.</td>
+            <td>I'm your fourth cell.</td>
+        </tr>
+</table>
 ```
 
-Now, let's define a function to fetch our data. This function will be used with **react-query** to handle the data fetching and caching:
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1697632466959/0ba71b6e-7394-412a-8dac-8d22febbb6c8.png)
 
-```javascript
-async function fetchTodos() {
-  const response = await fetch('/api/todos');
-  return response.json();
-}
+For ease of understanding, we shall use some CSS in this tutorial, if you are familiar with borders and padding then well and good otherwise for now just paste this CSS into your HTML file, and you can explore this later.
+
+```xml
+<style>
+    td {
+        padding: 10px;
+        border: 1px solid black;
+    }
+</style>
 ```
 
-Next, use the `useQuery` hook to fetch and manage your data:
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1697632720606/d75e3262-4f32-4259-8e6b-2bec646b3907.png)
 
-```javascript
-function TodoList() {
-  const { data, error, isLoading } = useQuery('todos', fetchTodos);
+## `<th>` tag
 
-  if (isLoading) {
-    return <p>Loading...</p>;
-  }
+Just like Thor our beloved God of Thunder is incomplete without his hammer, tables are incomplete without headers. Headers are bolded text above table columns that indicate what content is present inside each column, like **Full** **Name** -&gt; for Names. This is done using `<th>` 'table header' tag.
 
-  if (error) {
-    return <p>Error: {error.message}</p>;
-  }
-
-  return (
-    <ul>
-      {data.map(todo => (
-        <li key={todo.id}>{todo.title}</li>
-      ))}
-    </ul>
-  );
-}
+```xml
+<tr>
+       <th>First Col</th>
+       <th>Second Col</th>
+       <th>Third Col</th>
+       <th>Fourth Col</th>
+</tr>
 ```
 
-That's it! You now have a **react-query**\-powered component that fetches and displays your todos. The `useQuery` hook automatically handles caching, refetching, and background data synchronization.
+Add a new row with three table headers in the existing code and you shall get this:
 
-## **Mutating Data**
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1697633396344/6955b4fb-388d-40a2-8f81-81b75d9e1e11.png)
 
-Fetching data is only half the battle. You also need to update and mutate your data when users add, edit, or delete todos. Once again, **react-query** comes to the rescue.
+Notice how we have used four headers because there are four 'table data' cells in each row.
 
-Let's say you want to add a new todo. First, create a mutation function:
+## `colspan` & `rowspan`
 
-```javascript
-async function createTodo(newTodo) {
-  const response = await fetch('/api/todos', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(newTodo),
-  });
+Sometimes we want our cells to span multiple rows and columns that is when we use `colspan` & `rowspan` attributes. They can be used with both `td` and `th` of course because both are types of table cells.
 
-  return response.json();
-}
+Consider the below example in which we have used both of these attributes.
+
+```xml
+<table>
+        <tr>
+            <th>First Col</th>
+            <th>Second Col</th>
+            <th>Third Col</th>
+            <th>Fourth Col</th>
+        </tr>
+    
+        <tr>
+            <td rowspan="2">Hi, I'm your first cell.</td>
+            <td colspan="2">I'm your second cell.</td>
+            <td>I'm your fourth cell.</td>
+        </tr>
+    
+        <tr>
+            <td>I'm your third cell.</td>
+        </tr>
+    
+        <tr>
+            <td>Hi, I'm your first cell.</td>
+            <td>I'm your second cell.</td>
+            <td>I'm your third cell.</td>
+            <td>I'm your fourth cell.</td>
+        </tr>
+</table>
 ```
 
-Now, use the `useMutation` hook to handle the mutation:
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1697634136962/3448747c-a6bc-433f-a078-e43abfca73f7.png)
 
-```javascript
-import { useMutation, useQueryClient } from 'react-query';
+## `<colgroup>` & `<col>` tags
 
-function TodoForm() {
-  const queryClient = useQueryClient();
+We covered a lot of stuff about rows in tables, columns should not feel left out. In tables, there is a way for us to define column groups and set attributes for columns. This is done using `<colgroup>` and `<col>` tags.
 
-  const mutation = useMutation(newTodo => createTodo(newTodo), {
-    onSuccess: () => {
-      // Invalidate and refetch the todos query to update the list
-      queryClient.invalidateQueries('todos');
-    },
-  });
+The `<col>` tag is used to apply attributes to individual table columns and is placed inside the `<colgroup>` tag. Whereas the `<colgroup>` tag is to group multiple `<col>` elements with similar attributes and is typically placed inside the `<table>` tag above any 'table rows'.
 
-  const handleSubmit = e => {
-    e.preventDefault();
-    const formData = new FormData(e.target);
-    const newTodo = Object.fromEntries(formData);
+Let's consider an example where we shall use `<col>` to change the *background-color* of columns in our existing table.
 
-    mutation.mutate(newTodo);
-  };
-
-  return (
-    <form onSubmit={handleSubmit}>
-      <input type="text" name="title" placeholder="New Todo" />
-      <button type="submit">Add Todo</button>
-    </form>
-  );
-}
+```xml
+<table>
+        <colgroup>
+            <col style="background-color: lightgray;">
+            <col style="background-color: lightblue;">
+            <col style="background-color: lightgreen;">
+        </colgroup>
+        <tr>
+            <th>First Col</th>
+            <th>Second Col</th>
+            <th>Third Col</th>
+            <th>Fourth Col</th>
+        </tr>
+    
+        <tr>
+            <td>Hi, I'm your first cell.</td>
+            <td>I'm your second cell.</td>
+            <td>I'm your third cell.</td>
+            <td>I'm your fourth cell.</td>
+        </tr>
+    
+        <tr>
+            <td>Hi, I'm your first cell.</td>
+            <td>I'm your second cell.</td>
+            <td>I'm your third cell.</td>
+            <td>I'm your fourth cell.</td>
+        </tr>
+    
+        <tr>
+            <td>Hi, I'm your first cell.</td>
+            <td>I'm your second cell.</td>
+            <td>I'm your third cell.</td>
+            <td>I'm your fourth cell.</td>
+        </tr>
+</table>
 ```
 
-By using the `useMutation` hook, you're able to handle the mutation and update the cache accordingly. The `onSuccess` callback allows you to trigger a refetch of the todos after a successful mutation.
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1697634930812/ea3caaab-dbc2-4ee9-a27f-37b9d61f1090.png)
 
-## **Wrapping Up**
+Here you can see that only the first three columns have been colored because we used only 3 `<col>` tags.
 
-**react-query** is a game-changer when it comes to handling requests in React. It simplifies data fetching, caching, and mutations, allowing you to focus on building features rather than battling with state management. With its intuitive hooks and powerful caching mechanisms, **react-query** streamlines the entire process of handling requests and updating data in your React applications. You can also refer to the official docs for more info: https://tanstack.com/query/v3/docs/react/overview
+## Table Structure
 
-So, whether you're building a simple todo app or a complex e-commerce platform, give **react-query** a try. Your future self will thank you for the reduced complexity and enhanced developer experience it brings to the table. *Happy coding!* 🚀
+Lastly, we would cover how you can organize your table elements for better structure and styling. We use the following tags for table organization:
+
+### 1\. `<thead>`
+
+This section is used for column labels or headers. Anything you put here appears at the top of the table.
+
+```xml
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Age</th>
+      <th>Email</th>
+    </tr>
+  </thead>
+  <!-- More sections -->
+</table>
+```
+
+### 2\. `<tbody>`
+
+This contains the bulk of your data, it separates the header from the actual data, making the table structure more semantic.
+
+```xml
+<table>
+  <!-- ... -->
+  <tbody>
+    <tr>
+      <td>John</td>
+      <td>30</td>
+      <td>john@example.com</td>
+    </tr>
+  </tbody>
+</table>
+```
+
+### 3\. `<tfoot>`
+
+It can be used for summary information or any additional details related to the table data.
+
+```xml
+<table>
+  <!-- ... -->
+  <tfoot>
+    <tr>
+      <td colspan="2">Total People</td>
+      <td>1</td>
+    </tr>
+  </tfoot>
+</table>
+```
+
+Take a look at the below example where we have used these tags in our existing code for better readability & structure.
+
+```xml
+<table>
+        <colgroup>
+            <col style="background-color: lightgray;">
+            <col style="background-color: lightblue;">
+            <col style="background-color: lightgreen;">
+        </colgroup>
+        <thead>
+            <tr>
+                <th>First Col</th>
+                <th>Second Col</th>
+                <th>Third Col</th>
+                <th>Fourth Col</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Hi, I'm your first cell.</td>
+                <td>I'm your second cell.</td>
+                <td>I'm your third cell.</td>
+                <td>I'm your fourth cell.</td>
+            </tr>
+    
+            <tr>
+                <td>Hi, I'm your first cell.</td>
+                <td>I'm your second cell.</td>
+                <td>I'm your third cell.</td>
+                <td>I'm your fourth cell.</td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="4">This is the table footer.</td>
+            </tr>
+        </tfoot>
+    </table>
+```
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1697635515957/32321fc9-39ff-488d-b44a-24e48dbc7b33.png)
+
+And there you have it! You're now well-equipped to create tables in HTML. Refer to the below links for further reading.
+
+* [https://developer.mozilla.org/en-US/docs/Learn/HTML/Tables/Basics](https://developer.mozilla.org/en-US/docs/Learn/HTML/Tables/Basics)
+    
+* [https://www.tutorialspoint.com/html/html\_tables.htm](https://www.tutorialspoint.com/html/html_tables.htm)
+    
+
+Happy coding!
